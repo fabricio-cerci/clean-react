@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Styles from './login-styles.scss'
 import { Footer, Input, FormStatus, LoginHeader as Header } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
@@ -12,6 +12,7 @@ type Props = {
 }
 
 const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
+  const navigate = useNavigate()
   const [state, setState] = useState({
     isLoading: false,
     email: '',
@@ -43,6 +44,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
         isLoading: false,
         mainError: error.message
       })
+      navigate('/', { replace: true })
     }
   }
 
